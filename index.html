@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Acts Reading Plan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f4f6fa;
+        --surface: #ffffff;
+        --surface-2: #f8fafd;
+        --text: #172033;
+        --text-2: #64748b;
+        --muted: #8492a6;
+        --blue: #2780f5;
+        --blue-50: #e8f2ff;
+        --blue-nav: #e3eeff;
+        --blue-banner: #eaf3ff;
+        --blue-border: #d4e6ff;
+        --border: #e2e8f0;
+        --btn: #f3f6fb;
+        --purple: #9347e8;
+        --purple-line: #a855f7;
+        --purple-50: #f5edff;
+        --s1: 4px;
+        --s2: 8px;
+        --s3: 12px;
+        --s4: 16px;
+        --s6: 24px;
+        --s8: 32px;
+        --r-btn: 9px;
+        --r-card: 10px;
+        --r-outer: 14px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+      }
+      body {
+        background: var(--surface);
+        color: var(--text);
+        font:
+          400 14px/1.45 Inter,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        flex: none;
+      }
+      a {
+        color: var(--blue);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      :focus-visible {
+        outline: 2px solid var(--blue);
+        outline-offset: 2px;
+      }
+
+      .main {
+        padding: 28px;
+      }
+      .content {
+        max-width: 530px;
+        margin: 0 auto;
+      }
+
+      /* WeekHeader */
+      .week-header {
+        display: flex;
+        align-items: center;
+        gap: var(--s3);
+        margin-bottom: 20px;
+      }
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        flex: none;
+        border: 1px solid var(--border);
+        border-radius: var(--r-btn);
+        background: var(--btn);
+        color: var(--blue);
+        cursor: pointer;
+      }
+      .icon-btn:hover:not(:disabled) {
+        background: var(--blue-50);
+      }
+      .icon-btn:disabled {
+        color: #c3ccd9;
+        cursor: not-allowed;
+      }
+      .week-title {
+        flex: 1;
+        min-width: 0;
+      }
+      .week-title h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      .week-title p {
+        margin: 2px 0 0;
+        font-size: 14px;
+        color: var(--text-2);
+      }
+
+      /* ReadingGoalBanner */
+      .banner {
+        display: flex;
+        align-items: center;
+        gap: var(--s3);
+        margin-bottom: var(--s3);
+        padding: 14px var(--s4);
+        background: var(--blue-banner);
+        border: 1px solid var(--blue-border);
+        border-left: 4px solid var(--blue);
+        border-radius: var(--r-card);
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .banner svg {
+        width: 24px;
+        height: 24px;
+        color: var(--blue);
+      }
+
+      /* ChapterReadingList */
+      .chapters {
+        list-style: none;
+        margin: 0;
+        padding: 0 14px;
+        border: 1px solid var(--border);
+        border-radius: var(--r-card);
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        min-height: 44px;
+      }
+      .row + .row {
+        border-top: 1px solid var(--border);
+      }
+      .row label {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: var(--s3);
+        min-height: 44px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .row.done label span {
+        color: var(--muted);
+      }
+      .row input {
+        appearance: none;
+        -webkit-appearance: none;
+        margin: 0;
+        width: 18px;
+        height: 18px;
+        flex: none;
+        border: 1.5px solid #94a3b8;
+        border-radius: 4px;
+        background: #fff center / 12px no-repeat;
+        cursor: pointer;
+      }
+      .row input:checked {
+        background-color: var(--blue);
+        border-color: var(--blue);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      }
+      .read {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--s1);
+        font-size: 14px;
+        font-weight: 500;
+        padding: var(--s2) 0 var(--s2) var(--s2);
+      }
+      .read svg,
+      .ref svg {
+        width: 15px;
+        height: 15px;
+        stroke-width: 2.2;
+      }
+
+      /* SermonCard */
+      .sermon {
+        display: flex;
+        gap: 14px;
+        margin-top: 15px;
+        padding: 15px var(--s4);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--purple-line);
+        border-radius: var(--r-card);
+      }
+      .sermon > svg {
+        width: 22px;
+        height: 22px;
+        color: var(--purple);
+        margin-top: 2px;
+      }
+      .sermon .label {
+        font-size: 11.5px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--text-2);
+      }
+      .sermon h2 {
+        margin: 4px 0;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .sermon .meta {
+        font-size: 14px;
+        color: var(--text-2);
+      }
+      .ref {
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+        color: var(--text-2);
+      }
+      .ref:hover {
+        color: var(--blue);
+      }
+
+      @media (max-width: 640px) {
+        .main {
+          padding: 20px var(--s4);
+        }
+        .week-title h1 {
+          font-size: 22px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="main">
+      <div class="content" id="content" aria-live="polite"></div>
+    </main>
+
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <symbol id="i-book" viewBox="0 0 24 24">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+      </symbol>
+      <symbol id="i-left" viewBox="0 0 24 24">
+        <path d="m15 18-6-6 6-6" />
+      </symbol>
+      <symbol id="i-right" viewBox="0 0 24 24">
+        <path d="m9 18 6-6-6-6" />
+      </symbol>
+      <symbol id="i-ext" viewBox="0 0 24 24">
+        <path d="M7 17 17 7M7 7h10v10" />
+      </symbol>
+      <symbol id="i-users" viewBox="0 0 24 24">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+        <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+      </symbol>
+    </svg>
+
+    <script>
+      // ---- Data (kept separate from presentation) ----
+      const BIBLE_VERSION = { id: 111, code: "NIV" }; // ESV = 59, NLT = 116, CSB = 1713, KJV = 1
+      const WEEKS = [
+        {
+          date: "2026-10-25",
+          from: 1,
+          to: 4,
+          sermon: "A Community led by the Spirit",
+          passage: [1, "12-26"],
+          speaker: "Matt Metzger",
+        },
+        {
+          date: "2026-11-01",
+          from: 5,
+          to: 9,
+          sermon: "A Community for the World",
+          passage: [2, "1-13"],
+          speaker: "Daniel Owen",
+        },
+        {
+          date: "2026-11-08",
+          from: 10,
+          to: 15,
+          sermon: "A Community from the Future",
+          passage: [2, "14-47"],
+          speaker: "Charles Yu",
+        },
+        {
+          date: "2026-11-15",
+          from: 16,
+          to: 23,
+          sermon: "A Community with Power",
+          passage: [3, "1-26"],
+          speaker: "Ben Knox",
+        },
+        {
+          date: "2026-11-22",
+          from: 24,
+          to: 28,
+          sermon: "A Community in Conflict with the World",
+          passage: [4, "1-31"],
+          speaker: "Matt Metzger",
+        },
+      ];
+
+      // ---- Progress (saved in this browser) ----
+      const KEY = "acts-progress";
+      let done;
+      try {
+        done = new Set(JSON.parse(localStorage.getItem(KEY)) || []);
+      } catch {
+        done = new Set();
+      }
+      const save = () => {
+        try {
+          localStorage.setItem(KEY, JSON.stringify([...done]));
+        } catch {}
+      };
+
+      // ---- Helpers ----
+      const icon = (id) =>
+        `<svg viewBox="0 0 24 24" aria-hidden="true"><use href="#${id}"/></svg>`;
+      const yv = (ref) =>
+        `https://www.bible.com/bible/${BIBLE_VERSION.id}/ACT.${ref}.${BIBLE_VERSION.code}`;
+      const parseDate = (s) => {
+        const [y, m, d] = s.split("-");
+        return new Date(y, m - 1, d);
+      };
+      const fmtDate = (s) =>
+        parseDate(s).toLocaleDateString("en-US", {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+        });
+      const range = (a, b) =>
+        Array.from({ length: b - a + 1 }, (_, i) => a + i);
+
+      // ---- Components ----
+      const WeekHeader = (w, i) => `
+  <div class="week-header">
+    <button class="icon-btn" id="prev" aria-label="Previous week" title="Previous week" ${i === 0 ? "disabled" : ""}>${icon("i-left")}</button>
+    <div class="week-title"><h1>Week ${i + 1}</h1><p>${fmtDate(w.date)}</p></div>
+    <button class="icon-btn" id="next" aria-label="Next week" title="Next week" ${i === WEEKS.length - 1 ? "disabled" : ""}>${icon("i-right")}</button>
+  </div>`;
+
+      const ReadingGoalBanner = (w) =>
+        `<div class="banner">${icon("i-book")}<span>Read: Acts ${w.from}–${w.to}</span></div>`;
+
+      const ChapterReadingRow = (n) => `
+  <li class="row${done.has(n) ? " done" : ""}">
+    <label><input type="checkbox" data-ch="${n}" ${done.has(n) ? "checked" : ""}><span>Acts ${n}</span></label>
+    <a class="read" href="${yv(n)}" target="_blank" rel="noopener" aria-label="Read Acts ${n} on YouVersion">Read ${icon("i-ext")}</a>
+  </li>`;
+
+      const ChapterReadingList = (w) =>
+        `<ul class="chapters">${range(w.from, w.to).map(ChapterReadingRow).join("")}</ul>`;
+
+      const SermonCard = (w) => `
+  <section class="sermon" aria-label="Sermon">
+    ${icon("i-users")}
+    <div>
+      <div class="label">Sermon</div>
+      <h2>${w.sermon}</h2>
+      <div class="meta"><a class="ref" href="${yv(w.passage.join("."))}" target="_blank" rel="noopener">Acts ${w.passage[0]}:${w.passage[1]} ${icon("i-ext")}</a> · ${w.speaker}</div>
+    </div>
+  </section>`;
+
+      // ---- Render ----
+      const content = document.getElementById("content");
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      let week = WEEKS.findIndex((w) => parseDate(w.date) >= today);
+      if (week < 0) week = WEEKS.length - 1;
+
+      function render(focusId) {
+        const w = WEEKS[week];
+        content.innerHTML =
+          WeekHeader(w, week) +
+          ReadingGoalBanner(w) +
+          ChapterReadingList(w) +
+          SermonCard(w);
+        const f = focusId && document.getElementById(focusId);
+        if (f && !f.disabled) f.focus();
+      }
+
+      function go(delta) {
+        const next = week + delta;
+        if (next < 0 || next >= WEEKS.length) return;
+        week = next;
+        render(delta < 0 ? "prev" : "next");
+      }
+
+      content.addEventListener("click", (e) => {
+        const b = e.target.closest("button");
+        if (b?.id === "prev") go(-1);
+        if (b?.id === "next") go(1);
+      });
+      content.addEventListener("change", (e) => {
+        const n = +e.target.dataset.ch;
+        if (!n) return;
+        e.target.checked ? done.add(n) : done.delete(n);
+        e.target.closest(".row").classList.toggle("done", e.target.checked);
+        save();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") go(-1);
+        if (e.key === "ArrowRight") go(1);
+      });
+
+      render();
+
+      // Offline cache (only works over http/https, not file://)
+      if ("serviceWorker" in navigator && location.protocol.startsWith("http"))
+        navigator.serviceWorker.register("sw.js");
+    </script>
+  </body>
+</html>
